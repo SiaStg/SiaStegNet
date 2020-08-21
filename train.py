@@ -111,8 +111,6 @@ if args.model == 'kenet':
     net = src.models.KeNet()
 elif args.model == 'sid':
     net = src.models.SID()
-elif args.model == 'ks':  # 'kenet'+'sid'
-    net = src.models.KeSIDNet()
 else:
     raise NotImplementedError
 if args.finetune is not None:
@@ -164,7 +162,7 @@ def preprocess_data(images, labels, random_crop):
     else:
         ch, cw, h0, w0 = h, w, 0, 0
 
-    if args.model == 'kenet' or args.model == 'ks':  # 'kenet'+'sid'
+    if args.model == 'kenet':  
         cw = cw & ~1
         inputs = [
             images[..., h0:h0 + ch, w0:w0 + cw // 2],
@@ -188,7 +186,7 @@ def train(epoch):
         inputs, labels = preprocess_data(data['image'], data['label'], args.random_crop)
 
         optimizer.zero_grad()
-        if args.model == 'kenet' or args.model == 'ks':  # 'ks'='kenet'+'sid'
+        if args.model == 'kenet':  #
             outputs, feats_0, feats_1 = net(*inputs)
 
             # count parameters start
@@ -242,7 +240,7 @@ def valid():
         for data in val_loader:
             inputs, labels = preprocess_data(data['image'], data['label'], False)
 
-            if args.model == 'kenet' or args.model == 'ks':  # 'ks'='kenet'+'sid'
+            if args.model == 'kenet':  #
                 outputs, feats_0, feats_1 = net(*inputs)
                 valid_loss += criterion_1(outputs, labels).item() + \
                               args.alpha * criterion_2(feats_0, feats_1, labels)

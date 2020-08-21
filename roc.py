@@ -42,8 +42,6 @@ if args.model == 'kenet':
     net = src.models.KeNet()
 elif args.model == 'sid':
     net = src.models.SID()
-elif args.model == 'ks':   #'kenet'+'sid'
-    net = src.models.KeSIDNet()
 else:
     raise NotImplementedError
     
@@ -70,7 +68,7 @@ def preprocess_data(images, labels, random_crop):
     else:
     	ch, cw, h0, w0 = h, w, 0, 0
 
-    if args.model == 'kenet' or args.model == 'ks' :
+    if args.model == 'kenet':
         cw = cw & ~1
         inputs = [
             images[..., h0:h0+ch, w0:w0+cw//2],
@@ -91,7 +89,7 @@ def validation():
     with torch.no_grad():
         for data in valid_loader:
             inputs, labels = preprocess_data(data['image'], data['label'], args.random_crop)
-            if args.model == 'kenet' or args.model == 'ks' :
+            if args.model == 'kenet':
                 outputs, feats_0, feats_1 = net(*inputs)
             elif args.model == 'sid':
                 outputs = net(*inputs)

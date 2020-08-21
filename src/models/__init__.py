@@ -6,4 +6,3 @@ from .KeNet import *
 from .losses import *
 from .modules import *
 from .SID import *
-from .KeSIDNet import *
