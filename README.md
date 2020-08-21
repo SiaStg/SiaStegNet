@@ -1,6 +1,9 @@
 # SiaStegNet Pytorch
 A Siamese CNN for Image Steganalysis
 
+W. You, H. Zhang and X. Zhao, "A Siamese CNN for Image Steganalysis," in IEEE Transactions on Information Forensics and Security, vol. 16, pp. 291-306, 2021, doi: 10.1109/TIFS.2020.3013204.
+
+
 ## Overview
 This repository contains a implementation of SiaStegNet, along with pre-trained models and examples.
 
