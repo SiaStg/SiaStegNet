@@ -22,6 +22,7 @@ We hope that our SiaStegNet design can provide some inspiration for future resea
 python train.py --train-cover-dir ... --val-cover-dir ... --train-stego-dir ... --val-stego-dir ... --model kenet --ckpt-dir ...
 ```
 (''kenet'' is the SiaStegNet, because my name is ''ke''. ^_^)
+(!!!The NVIDIA GeForce RTX 2080 Ti graphics card is not recommended!!!)
 #### Other Parameters
 * --epoch
 * --lr
